@@ -19,7 +19,5 @@ A simple application demonstrating TCP communication between a client and a serv
 - Adaptive interface.
 ## Not yet implemented functionality
 - Automatic reconnection and continuation of messaging.
-## Known issues
-- Physical disconnection (Shutdown) is not yet used because it causes the next attempt to communicate with the same addresses to fail (only one usage of each socket address is normally permitted). Possible fix: use a SO_LINGER flag on the client side.
 ## Compatibility
 - Requires .NET Framework 4.7.2 or higher.
