@@ -47,6 +47,8 @@ namespace TcpLibrary.Sockets
             try { address = clientSocket.RemoteEndPoint; }
             catch (Exception e) when (e is SocketException || e is ObjectDisposedException) { ex = e; }
 
+            try { clientSocket.Shutdown(SocketShutdown.Both); }
+            catch (Exception) { /* ignore */ }
             try { clientSocket.Dispose(); }
             catch (Exception) { /* ignore */ }
             finally { clientSocket = null; }
@@ -87,6 +89,9 @@ namespace TcpLibrary.Sockets
         /// <inheritdoc />
         public override void Dispose()
         {
+            try { clientSocket?.Shutdown(SocketShutdown.Both); }
+            catch (Exception) { /* ok case */ }
+
             try { clientSocket?.Dispose(); }
             catch (ObjectDisposedException) { /* ok case */ }
             finally { clientSocket = null; }

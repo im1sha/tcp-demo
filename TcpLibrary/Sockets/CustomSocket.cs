@@ -86,6 +86,9 @@ namespace TcpLibrary.Sockets
         /// <inheritdoc />
         public virtual void Dispose()
         {
+            try { socket?.Shutdown(SocketShutdown.Both); }
+            catch (Exception) { /* ok case */ }
+
             try { socket?.Dispose(); }
             catch (ObjectDisposedException) { /* ok case */ }
             finally { socket = null; }
